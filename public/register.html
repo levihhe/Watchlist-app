@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="hu">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Watchlist - Regisztráció</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <header>
+      <h1>Watchlist App</h1>
+      <nav>
+        <a href="login.html">Bejelentkezés</a>
+        <a href="register.html">Regisztráció</a>
+      </nav>
+    </header>
+
+    <main>
+      <div class="card">
+        <h2>Regisztráció</h2>
+        <div id="registerMsg"></div>
+
+        <form id="registerForm">
+          <input type="email" id="email" placeholder="Email" required />
+          <input
+            type="password"
+            id="password"
+            placeholder="Jelszó (min. 4 karakter)"
+            required
+          />
+          <button type="submit">Regisztráció</button>
+        </form>
+
+        <p style="margin-top: 10px; font-size: 13px;">
+          Már van fiókod?
+          <a href="login.html" class="small-link">Jelentkezz be itt</a>.
+        </p>
+      </div>
+    </main>
+
+    <script>
+      const form = document.getElementById("registerForm");
+      const msgDiv = document.getElementById("registerMsg");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        msgDiv.textContent = "";
+        msgDiv.className = "";
+
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value;
+
+        try {
+          const res = await fetch("/api/register", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password })
+          });
+
+          const data = await res.json();
+
+          if (!res.ok) {
+            msgDiv.className = "error";
+            msgDiv.textContent = data.error;
+            return;
+          }
+
+          msgDiv.className = "success";
+          msgDiv.textContent = "Sikeres regisztráció! Most már bejelentkezhetsz.";
+        } catch {
+          msgDiv.className = "error";
+          msgDiv.textContent = "Nem lehet csatlakozni a szerverhez.";
+        }
+      });
+    </script>
+  </body>
+</html>

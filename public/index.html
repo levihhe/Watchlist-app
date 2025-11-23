@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="hu">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Watchlist</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <header>
+      <h1>🎬 Watchlist App</h1>
+      <nav>
+        <a href="index.html">Watchlist</a>
+        <button id="logoutBtn" class="logout-btn">Kijelentkezés</button>
+      </nav>
+    </header>
+
+    <main>
+      <div class="card">
+        <h2>Filmkeresés</h2>
+
+        <div class="top-row">
+          <input type="text" id="searchInput" placeholder="Film címe..." />
+          <button id="searchBtn">Keresés</button>
+        </div>
+
+        <div id="moviesContainer" class="movies-list"></div>
+        <div id="moviesError" class="error"></div>
+      </div>
+
+      <div class="card">
+        <h2>Saját watchlist</h2>
+
+        <div id="watchlistContainer" class="watchlist-list"></div>
+        <div id="watchlistError" class="error"></div>
+      </div>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
